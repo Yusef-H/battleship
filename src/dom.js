@@ -15,3 +15,5 @@ function generateCells(board){
         board.appendChild(cell);
     }
 }
+
+export {Dom};

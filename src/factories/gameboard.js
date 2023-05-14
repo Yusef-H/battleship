@@ -15,6 +15,7 @@ function GameBoard(){
                 throw new Error('Invalid ship placement: overlapping ships.');
             }
 
+            // console.log("x = "+ x + "      y = "+ y);
 
             board[x][y] = ship;
             switch(direction){
@@ -25,10 +26,10 @@ function GameBoard(){
                     y--;
                     break;
                 case 'down':
-                    x--;
+                    x++;
                     break;
                 case 'up':
-                    x++;
+                    x--;
                     break;
             }
         }       
