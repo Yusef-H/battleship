@@ -15,6 +15,7 @@ function Player(id){
                 randomCords = getRandomCoordinates();
         }
         attack(enemy, randomCords.x, randomCords.y);
+        //for testing
         return randomCords;
     }
 
