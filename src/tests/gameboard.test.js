@@ -15,18 +15,18 @@ describe('GameBoard', () => {
     test('Place ship to right direction', () => {
       gameBoard.placeShip(ship, 0, 0, 'right');
       
-      expect(gameBoard.board[0][0]).toEqual(ship);
-      expect(gameBoard.board[0][1]).toEqual(ship);
-      expect(gameBoard.board[0][2]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][0]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][1]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][2]).toEqual(ship);
       
     })
   
     test('Place ship to left direction', () => {
       gameBoard.placeShip(ship, 0, 3, 'left');
       
-      expect(gameBoard.board[0][3]).toEqual(ship);
-      expect(gameBoard.board[0][2]).toEqual(ship);
-      expect(gameBoard.board[0][1]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][3]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][2]).toEqual(ship);
+      expect(gameBoard.getBoard()[0][1]).toEqual(ship);
     })
   
     test('place ship in illegal spot', () => {
@@ -62,7 +62,7 @@ describe('GameBoard', () => {
 
     test('miss', () =>{
       gameBoard.receiveAttack(1,6);
-      expect(gameBoard.board[1][6]).toEqual('Missed');
+      expect(gameBoard.getBoard()[1][6]).toEqual('Missed');
     })
   })
 

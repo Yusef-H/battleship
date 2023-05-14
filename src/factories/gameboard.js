@@ -56,8 +56,12 @@ function GameBoard(){
         }
     }
 
+    const getBoard = () => {
+        return board;
+    }
+
     return {
-        board,
+        getBoard,
         placeShip,
         receiveAttack,
         isAllSunk
