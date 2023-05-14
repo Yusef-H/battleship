@@ -9,7 +9,7 @@ function GameBoard(){
         for(let i = 0; i < ship.length; i++){
             if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
                 throw new Error('Invalid ship placement: coordinates are out of bounds.');
-            }
+            }   
         
             if (board[x][y]) {
                 throw new Error('Invalid ship placement: overlapping ships.');
@@ -19,15 +19,18 @@ function GameBoard(){
             board[x][y] = ship;
             switch(direction){
                 case 'right':
-                    y = y + 1;
+                    y++;
+                    break;
                 case 'left':
-                    y = y - 1;
+                    y--;
+                    break;
                 case 'down':
-                    x = x - 1;
+                    x--;
+                    break;
                 case 'up':
-                    x = x + 1;
+                    x++;
+                    break;
             }
-            i++;
         }       
     }
 
