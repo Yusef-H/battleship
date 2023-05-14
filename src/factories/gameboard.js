@@ -38,16 +38,29 @@ function GameBoard(){
         if(board[x][y] && board[x][y] !== 'Missed'){
             const shipDamaged = board[x][y];
             shipDamaged.hit();
+            board[x][y] = 'Hit';
         }
         else{
             board[x][y] = 'Missed';
         }
     }
 
+    const isAllSunk = () => {
+        for(let x = 0; x < BOARD_SIZE; x++){
+            for(let y = 0; y < BOARD_SIZE; y++){
+                if(board[x][y] !== 'Hit' && board[x][y] !== 'Missed' && board[x][y]){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     return {
         board,
         placeShip,
-        receiveAttack
+        receiveAttack,
+        isAllSunk
     }
 }
 

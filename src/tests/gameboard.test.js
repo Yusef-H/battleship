@@ -44,6 +44,8 @@ describe('GameBoard', () => {
   })
 
   describe('receiveAttack function', () =>{
+    let gameBoard;
+    let ship;
     beforeEach(() => {
       gameBoard = GameBoard();
       ship = Ship('carrier', 5);
@@ -61,6 +63,43 @@ describe('GameBoard', () => {
     test('miss', () =>{
       gameBoard.receiveAttack(1,6);
       expect(gameBoard.board[1][6]).toEqual('Missed');
+    })
+  })
+
+  describe('allSunk function', () =>{
+    let gameBoard;
+    let ship1;
+    let ship2;
+    beforeEach(() => {
+      gameBoard = GameBoard();
+      ship1 = Ship('carrier', 5);
+      ship2 = Ship('cruiser', 3);
+      gameBoard.placeShip(ship1, 0, 0, 'right');
+      gameBoard.placeShip(ship2, 6, 0, 'down');
+    });
+
+    test('allSunk truthy', () => {
+      gameBoard.receiveAttack(0, 0);
+      gameBoard.receiveAttack(0, 1);
+      gameBoard.receiveAttack(0, 2);
+      gameBoard.receiveAttack(0, 3);
+      gameBoard.receiveAttack(0, 4);
+      gameBoard.receiveAttack(6, 0);
+      gameBoard.receiveAttack(5, 0);
+      gameBoard.receiveAttack(4, 0);
+      expect(gameBoard.isAllSunk()).toBeTruthy();
+    })
+
+    test('allSunk falsy', () => {
+      gameBoard.receiveAttack(0, 0);
+      gameBoard.receiveAttack(0, 1);
+      gameBoard.receiveAttack(0, 2);
+      expect(gameBoard.isAllSunk()).toBeFalsy();
+      
+      gameBoard.receiveAttack(6, 0);
+      gameBoard.receiveAttack(5, 0);
+      gameBoard.receiveAttack(4, 0);
+      expect(gameBoard.isAllSunk()).toBeFalsy();
     })
   })
   
