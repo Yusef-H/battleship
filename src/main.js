@@ -2,14 +2,16 @@ import './style.css';
 import {GameBoard} from './factories/gameboard';
 import {Player} from './factories/player';
 import {Ship} from './factories/ship';
-
+import {Dom} from './dom';
 
 function game() {
     const player1 = Player(1);
     const player2 = Player(2);
     populateGameBoard(player1.playerGameBoard);
     populateGameBoard(player2.playerGameBoard);
-    console.log(player1.playerGameBoard.getBoard());
+    
+    Dom.renderShips(player1.playerGameBoard.getBoard(), 'player');
+    Dom.renderShips(player1.playerGameBoard.getBoard(), 'computer');
 }
 
 
@@ -27,5 +29,6 @@ function populateGameBoard(playerGameBoard){
     playerGameBoard.placeShip(submarine, 0, 9, 'down');
     playerGameBoard.placeShip(destroyer, 9, 9, 'up');
 }
+
 
 game();
