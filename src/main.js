@@ -25,7 +25,6 @@ async function attack(x, y){
     }
     let validAttack = player.attack(computerPlayer, x, y);
     Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
-    console.log(validAttack);
     if(validAttack){
         Dom.displayOnMsgBoard("Computer is attacking.");
         await new Promise((resolve) => {
@@ -33,15 +32,19 @@ async function attack(x, y){
                 
                 computerPlayer.computerAttack(player);
                 resolve();
-            }, 100);
+            }, 1000);
         }) 
         Dom.displayOnMsgBoard("Your turn to attack");
         Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
 
-
-        if(isGameOver()){
-            Dom.displayOnMsgBoard("Game finished");
-            console.log("hi");
+        let gameResults = isGameOver();
+        if(gameResults.end){
+            if(gameResults.winner === 'player'){
+                Dom.displayOnMsgBoard("You have won the Game!");
+            }
+            else{
+                Dom.displayOnMsgBoard("You have lost! The computer has made all your ships sink!")
+            }
             gameOver = true;
         }
     }
@@ -49,7 +52,15 @@ async function attack(x, y){
 }
 
 function isGameOver(){
-    return computerPlayer.playerGameBoard.isAllSunk();
+    if(computerPlayer.playerGameBoard.isAllSunk()){
+        return {end: true, winner: 'player'};
+    }
+    else if(player.playerGameBoard.isAllSunk()){   
+        return {end: true, winner: 'computer'};
+    }
+    else{
+        return {end: false, winner: 'None'};
+    }
 }
 
 
