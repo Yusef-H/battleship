@@ -4,15 +4,33 @@ import {Player} from './factories/player';
 import {Ship} from './factories/ship';
 import {Dom} from './dom';
 
+const player = Player();
+const computerPlayer = Player();
+
 function game() {
-    const player1 = Player(1);
-    const player2 = Player(2);
-    populateGameBoard(player1.playerGameBoard);
-    populateGameBoard(player2.playerGameBoard);
+    populateGameBoard(player.playerGameBoard);
+    populateGameBoard(computerPlayer.playerGameBoard);
     
-    Dom.renderShips(player1.playerGameBoard.getBoard(), 'player');
-    Dom.renderShips(player1.playerGameBoard.getBoard(), 'computer');
+    Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
+    Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
+    Dom.setAttackCallback(attack);
+
+    Dom.displayOnMsgBoard("Your turn to attack.");
+
+    // while(true){
+        
+        
+    // }
 }
+
+function attack(x, y){
+    player.attack(computerPlayer, x, y);
+    console.log('hi');
+    Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
+    Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
+}
+
+
 
 
 
@@ -32,3 +50,4 @@ function populateGameBoard(playerGameBoard){
 
 
 game();
+

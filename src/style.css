@@ -35,3 +35,18 @@ body{
     height: 100%;
     width: 100%;
 }
+
+#board2 div:hover{
+    background-color: rgb(129, 126, 126);
+    cursor: pointer;
+}
+
+#msg-board{
+    width: clamp(200px, 60vmin, 550px);
+    height: 80px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(20px, 4vmin, 550px);
+}
