@@ -6,6 +6,7 @@ import {Dom} from './dom';
 
 const player = Player();
 const computerPlayer = Player();
+let turn = 1;
 
 function game() {
     populateGameBoard(player.playerGameBoard);
@@ -14,20 +15,24 @@ function game() {
     Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
     Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
     Dom.setAttackCallback(attack);
+    Dom.displayOnMsgBoard("Your turn to attack");
 
-    Dom.displayOnMsgBoard("Your turn to attack.");
-
-    // while(true){
-        
-        
-    // }
 }
 
-function attack(x, y){
+async function attack(x, y){
     player.attack(computerPlayer, x, y);
-    console.log('hi');
-    Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
     Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
+    Dom.displayOnMsgBoard("Computer is attacking.");
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            
+            computerPlayer.computerAttack(player);
+            resolve();
+        }, 1000);
+    }) 
+    Dom.displayOnMsgBoard("Your turn to attack");
+    Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
+    
 }
 
 
