@@ -6,7 +6,7 @@ import {Dom} from './dom';
 
 const player = Player();
 const computerPlayer = Player();
-let turn = 1;
+let gameOver = false;
 
 function game() {
     populateGameBoard(player.playerGameBoard);
@@ -20,19 +20,36 @@ function game() {
 }
 
 async function attack(x, y){
-    player.attack(computerPlayer, x, y);
+    if(gameOver){
+        return;
+    }
+    let validAttack = player.attack(computerPlayer, x, y);
     Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
-    Dom.displayOnMsgBoard("Computer is attacking.");
-    await new Promise((resolve) => {
-        setTimeout(() => {
-            
-            computerPlayer.computerAttack(player);
-            resolve();
-        }, 1000);
-    }) 
-    Dom.displayOnMsgBoard("Your turn to attack");
-    Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
+    console.log(validAttack);
+    if(validAttack){
+        Dom.displayOnMsgBoard("Computer is attacking.");
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                
+                computerPlayer.computerAttack(player);
+                resolve();
+            }, 100);
+        }) 
+        Dom.displayOnMsgBoard("Your turn to attack");
+        Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
+
+
+        if(isGameOver()){
+            Dom.displayOnMsgBoard("Game finished");
+            console.log("hi");
+            gameOver = true;
+        }
+    }
     
+}
+
+function isGameOver(){
+    return computerPlayer.playerGameBoard.isAllSunk();
 }
 
 

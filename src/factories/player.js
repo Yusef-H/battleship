@@ -4,7 +4,8 @@ function Player(id){
     let playerGameBoard = GameBoard();
 
     const attack = (enemy, x, y) => {
-        enemy.playerGameBoard.receiveAttack(x, y);
+        let isSuccess = enemy.playerGameBoard.receiveAttack(x, y);
+        return isSuccess;
     }
 
     const computerAttack = (enemy) => {

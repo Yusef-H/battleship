@@ -36,25 +36,30 @@ function GameBoard(){
     }
 
     const receiveAttack = (x, y) => {
-        if(board[x][y] && board[x][y] !== 'Missed'){
+        if(board[x][y] != null && board[x][y] !== 'Missed' && board[x][y] !== 'Hit'){
             const shipDamaged = board[x][y];
             shipDamaged.hit();
             board[x][y] = 'Hit';
+            return true;
+        }
+        else if(board[x][y] == null){
+            board[x][y] = 'Missed';
+            return true;
         }
         else{
-            board[x][y] = 'Missed';
+            return false;
         }
     }
 
     const isAllSunk = () => {
         for(let x = 0; x < BOARD_SIZE; x++){
             for(let y = 0; y < BOARD_SIZE; y++){
-                if(board[x][y] !== 'Hit' && board[x][y] !== 'Missed' && board[x][y]){
+                if(board[x][y] !== 'Hit' && board[x][y] !== 'Missed' && board[x][y] != null){
                     return false;
                 }
             }
-            return true;
         }
+        return true;
     }
 
     const getBoard = () => {
