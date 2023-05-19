@@ -35,21 +35,24 @@ const Dom = (() =>  {
             for(let y = 0; y < fleet[0].length; y++){
                 let index = getCellIdxFromCords(x, y);
                 let board = caller == 'player' ? board1 : board2;
+                let ship = fleet[x][y];
                 const cells = Array.from(board.children);
-                if(fleet[x][y] != null && fleet[x][y] != 'Missed' && fleet[x][y] != 'Hit'){   
+                if(ship != null && ship != 'Missed' && ship != 'Hit'){   
                     if(caller !== 'computer')
-                        cells[index].style = "background-color: red;";
+                        cells[index].style = "background-color: red;";   
                 }
-                if(fleet[x][y] == 'Hit'){
-                    cells[index].style = "background-color: green;"
+                if(ship == 'Hit'){
+                    cells[index].style = "background-color: red;"
+                    cells[index].innerHTML = 'X';
                 }
-                if(fleet[x][y] == 'Missed'){
-                    cells[index].style = "background-color: blue;"
+                if(ship == 'Missed'){
+                    cells[index].innerHTML = '&middot';
                 }
                 
             }
         }
     }
+
 
     function getCellIdxFromCords(x, y){
         return x*10 + y;

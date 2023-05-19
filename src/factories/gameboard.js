@@ -12,9 +12,6 @@ function GameBoard(){
             return false;
         }
         for(let i = 0; i < ship.length; i++){
-
-            // console.log("x = "+ x + "      y = "+ y);
-
             board[x][y] = ship;
             switch(direction){
                 case 'right':
@@ -61,12 +58,12 @@ function GameBoard(){
         return true;
     }
 
-
+    /* Randomly place ship in the board */ 
     function randomPlaceShip(ship) {
         const boardSize = 10;
       
         let shipPlaced = false;
-      
+        // tries until a valid ship placement happens.
         while (!shipPlaced) {
             let direction = Math.random() < 0.5 ? 'horizontal' : 'vertical'; // Randomly choose the ship's direction
         
@@ -78,9 +75,6 @@ function GameBoard(){
                 startX = Math.floor(Math.random() * boardSize);
                 startY = Math.floor(Math.random() * (boardSize - ship.length + 1));
             }
-
-            console.log(startX + "    " + startY);
-        
             // Check if the selected positions are available for placing the ship
             direction = direction === 'horizontal' ? 'right' : 'up';
             if(placeShip(ship, startX, startY, direction)){
