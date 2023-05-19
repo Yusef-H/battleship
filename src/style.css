@@ -21,7 +21,7 @@ body{
 
 #board1, #board2{
     display: grid;
-    border: 1px solid blue;
+    border: 1px solid rgb(0, 0, 0);
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     width: 100%;
@@ -50,4 +50,8 @@ body{
     align-items: center;
     text-align: center;
     font-size: clamp(20px, 4vmin, 550px);
+}
+
+.invisible{
+    background-color: white;
 }

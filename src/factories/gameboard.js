@@ -1,3 +1,5 @@
+
+
 const BOARD_SIZE = 10;
 
 function GameBoard(){
@@ -6,14 +8,10 @@ function GameBoard(){
 
     // place ship starting at (x,y) according to length and direction.
     const placeShip = (ship, x, y, direction) => {
+        if(!isValidPositioning(ship, x, y, direction)){
+            return false;
+        }
         for(let i = 0; i < ship.length; i++){
-            if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
-                throw new Error('Invalid ship placement: coordinates are out of bounds.');
-            }   
-        
-            if (board[x][y]) {
-                throw new Error('Invalid ship placement: overlapping ships.');
-            }
 
             // console.log("x = "+ x + "      y = "+ y);
 
@@ -32,7 +30,63 @@ function GameBoard(){
                     x--;
                     break;
             }
-        }       
+        }   
+        return true;    
+    }
+
+    function isValidPositioning(ship, x, y, direction){
+        for(let i = 0; i < ship.length; i++){
+            if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
+                return false;
+            }   
+        
+            if (board[x][y]) {
+                return false;
+            }
+            switch(direction){
+                case 'right':
+                    y++;
+                    break;
+                case 'left':
+                    y--;
+                    break;
+                case 'down':
+                    x++;
+                    break;
+                case 'up':
+                    x--;
+                    break;
+            }
+        }
+        return true;
+    }
+
+
+    function randomPlaceShip(ship) {
+        const boardSize = 10;
+      
+        let shipPlaced = false;
+      
+        while (!shipPlaced) {
+            let direction = Math.random() < 0.5 ? 'horizontal' : 'vertical'; // Randomly choose the ship's direction
+        
+            let startX, startY;
+            if (direction === 'horizontal') {
+                startX = Math.floor(Math.random() * (boardSize - ship.length + 1));
+                startY = Math.floor(Math.random() * boardSize);
+            } else {
+                startX = Math.floor(Math.random() * boardSize);
+                startY = Math.floor(Math.random() * (boardSize - ship.length + 1));
+            }
+
+            console.log(startX + "    " + startY);
+        
+            // Check if the selected positions are available for placing the ship
+            direction = direction === 'horizontal' ? 'right' : 'up';
+            if(placeShip(ship, startX, startY, direction)){
+                shipPlaced = true;
+            }
+        }
     }
 
     const receiveAttack = (x, y) => {
@@ -70,7 +124,8 @@ function GameBoard(){
         getBoard,
         placeShip,
         receiveAttack,
-        isAllSunk
+        isAllSunk,
+        randomPlaceShip
     }
 }
 

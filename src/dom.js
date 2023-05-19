@@ -15,8 +15,10 @@ const Dom = (() =>  {
     function generateCells(board, isEnemy){
         for(let i = 0; i < 100; i++){
             const cell = document.createElement('div');
-            if(isEnemy)
+            if(isEnemy){
                 cell.addEventListener('click', handleClick.bind(null, i));
+                cell.classList.add('invisible');
+            }
             board.appendChild(cell);
         }
     }
@@ -35,7 +37,8 @@ const Dom = (() =>  {
                 let board = caller == 'player' ? board1 : board2;
                 const cells = Array.from(board.children);
                 if(fleet[x][y] != null && fleet[x][y] != 'Missed' && fleet[x][y] != 'Hit'){   
-                    cells[index].style = "background-color: red;";
+                    if(caller !== 'computer')
+                        cells[index].style = "background-color: red;";
                 }
                 if(fleet[x][y] == 'Hit'){
                     cells[index].style = "background-color: green;"

@@ -15,6 +15,8 @@ function Ship(type, length){
         return damage;
     }
 
+    
+
     return {
         type, 
         length, 
