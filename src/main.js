@@ -8,12 +8,17 @@ const computerPlayer = Player();
 let gameOver = false;
 
 function game() {
+    gameOver = false;
+    player.playerGameBoard.resetGameBoard();
+    computerPlayer.playerGameBoard.resetGameBoard();    
+    
     populateGameBoard(player.playerGameBoard);
     populateGameBoard(computerPlayer.playerGameBoard);
     
     Dom.renderShips(player.playerGameBoard.getBoard(), 'player');
     Dom.renderShips(computerPlayer.playerGameBoard.getBoard(), 'computer');
     Dom.setAttackCallback(attack);
+    Dom.setGameCallBack(game);
     Dom.displayOnMsgBoard("Your turn to attack");
 
 }

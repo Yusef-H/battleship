@@ -4,7 +4,7 @@ const BOARD_SIZE = 10;
 
 function GameBoard(){
     // Represent the game board as a 2d array of objects.
-    const board = Array(BOARD_SIZE).fill(null).map(() => Array(BOARD_SIZE).fill(null));
+    let board = Array(BOARD_SIZE).fill(null).map(() => Array(BOARD_SIZE).fill(null));
 
     // place ship starting at (x,y) according to length and direction.
     const placeShip = (ship, x, y, direction) => {
@@ -114,12 +114,17 @@ function GameBoard(){
         return board;
     }
 
+    const resetGameBoard = () => {
+        board = Array(BOARD_SIZE).fill(null).map(() => Array(BOARD_SIZE).fill(null));
+    }
+
     return {
         getBoard,
         placeShip,
         receiveAttack,
         isAllSunk,
-        randomPlaceShip
+        randomPlaceShip,
+        resetGameBoard
     }
 }
 

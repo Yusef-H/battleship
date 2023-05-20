@@ -4,8 +4,10 @@ const Dom = (() =>  {
     const board2 = document.getElementById('board2');
     const msgBoard = document.getElementById('msg-board');
     let attackCallback = null; // Callback function for handling attacks
+    let gameCallBack = null; // callback to restart game.
 
     initializeBoards();
+    handleRestartButton();
 
     function initializeBoards(){
         generateCells(board1, false);
@@ -36,6 +38,7 @@ const Dom = (() =>  {
                 let index = getCellIdxFromCords(x, y);
                 let board = caller == 'player' ? board1 : board2;
                 let ship = fleet[x][y];
+                
                 const cells = Array.from(board.children);
                 if(ship != null && ship != 'Missed' && ship != 'Hit'){   
                     if(caller !== 'computer')
@@ -48,7 +51,6 @@ const Dom = (() =>  {
                 if(ship == 'Missed'){
                     cells[index].innerHTML = '&middot';
                 }
-                
             }
         }
     }
@@ -70,10 +72,32 @@ const Dom = (() =>  {
         attackCallback = callback;
     }
 
+    function setGameCallBack(callback){
+        gameCallBack = callback;
+    }
+
+    function handleRestartButton(){
+        const restartBtn = document.querySelector('.restart-btn');
+        restartBtn.addEventListener('click', () => {
+            clearBoardCells(board1);
+            clearBoardCells(board2);
+            gameCallBack();
+        })
+    }
+
+    function clearBoardCells(board){
+        const boardCells = board.querySelectorAll('div');
+        boardCells.forEach((cell) => {
+            cell.innerHTML = "";
+            cell.style.backgroundColor = "bisque";
+        })
+    }
+
     return{
         renderShips,
         displayOnMsgBoard,
-        setAttackCallback
+        setAttackCallback,
+        setGameCallBack
     }
 })();
 
