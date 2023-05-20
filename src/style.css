@@ -83,4 +83,22 @@ body{
     cursor: pointer;
 }
 
-  
+.cruiser{
+    background-color: blue;
+}
+
+.carrier{
+    background-color:darkmagenta;
+}
+
+.battleship{
+    background-color: green;
+}
+
+.submarine{
+    background-color: cornflowerblue;
+}
+
+.destroyer{
+    background-color: darkkhaki;
+}

@@ -41,8 +41,9 @@ const Dom = (() =>  {
                 
                 const cells = Array.from(board.children);
                 if(ship != null && ship != 'Missed' && ship != 'Hit'){   
-                    if(caller !== 'computer')
-                        cells[index].style = "background-color: red;";   
+                    if(caller !== 'computer'){
+                        cells[index].classList.add(ship.type);   
+                    }
                 }
                 if(ship == 'Hit'){
                     cells[index].style = "background-color: red;"
@@ -79,19 +80,20 @@ const Dom = (() =>  {
     function handleRestartButton(){
         const restartBtn = document.querySelector('.restart-btn');
         restartBtn.addEventListener('click', () => {
-            clearBoardCells(board1);
-            clearBoardCells(board2);
+            clearBoard(board1);
+            clearBoard(board2);
+            initializeBoards();
             gameCallBack();
         })
     }
 
-    function clearBoardCells(board){
-        const boardCells = board.querySelectorAll('div');
-        boardCells.forEach((cell) => {
-            cell.innerHTML = "";
-            cell.style.backgroundColor = "bisque";
-        })
+    function clearBoard(board){
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
+        }
     }
+
+    
 
     return{
         renderShips,
