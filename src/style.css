@@ -84,7 +84,7 @@ body{
 }
 
 .cruiser{
-    background-color: blue;
+    background-color:orange;
 }
 
 .carrier{
@@ -96,9 +96,9 @@ body{
 }
 
 .submarine{
-    background-color: cornflowerblue;
+    background-color:yellow;
 }
 
 .destroyer{
-    background-color: darkkhaki;
+    background-color: orangered;
 }

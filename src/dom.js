@@ -47,10 +47,9 @@ const Dom = (() =>  {
                 }
                 if(ship == 'Hit'){
                     cells[index].style = "background-color: red;"
-                    cells[index].innerHTML = 'X';
                 }
                 if(ship == 'Missed'){
-                    cells[index].innerHTML = '&middot';
+                    cells[index].style = 'background-color: skyblue;';
                 }
             }
         }
